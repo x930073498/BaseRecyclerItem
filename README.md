@@ -26,7 +26,7 @@ if databingding is conflicted with kotlin then  you should add
 	       kapt { generateStubs = true }
 		
 	
-in you app.gradle within tag android  and add a dependencies 
+in you app.gradle within tag android  and add a dependency 
 
 	      kapt 'com.android.databinding:compiler:$your-databingding-version(3.0.0-alpha4)'
 		
