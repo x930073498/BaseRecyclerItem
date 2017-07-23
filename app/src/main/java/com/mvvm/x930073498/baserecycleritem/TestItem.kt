@@ -14,6 +14,7 @@ class TestItem : AbstractBaseItem() {
 
     var title: CharSequence? = null
 
+
     override fun getLayoutId(): Int {
         return R.layout.lauout_item_test_item
     }

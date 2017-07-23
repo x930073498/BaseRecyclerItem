@@ -9,11 +9,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.ListView
 import com.mvvm.x930073498.baserecycleritem.databinding.ActivityMainBinding
-import com.mvvm.x930073498.library.BaseAdapter
-import com.mvvm.x930073498.library.BaseItem
-import com.mvvm.x930073498.library.registerLocalReceiver
-import com.mvvm.x930073498.library.unregisterLocalReceiver
+import com.mvvm.x930073498.library.*
+
 class MainActivity : AppCompatActivity() {
     val binding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)

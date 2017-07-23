@@ -6,23 +6,28 @@
     <data>
 
         <variable
-            name="itemAnimator"
-            type="android.support.v7.widget.DefaultItemAnimator" />
+        name="itemAnimator"
+        type="android.support.v7.widget.DefaultItemAnimator" />
 
         <variable
-            name="layoutManger"
-            type="android.support.v7.widget.LinearLayoutManager" />
+        name="layoutManger"
+        type="android.support.v7.widget.LinearLayoutManager" />
 
         <variable
             name="adapter"
             type="com.mvvm.x930073498.library.BaseAdapter" />
     </data>
-    <android.support.v7.widget.RecyclerView
-        adapter="@{adapter}"
-        itemAnimator="@{itemAnimator}"
-        app:layoutManager="@{layoutManger}"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    <!--<ListView-->
+        <!--android:id="@+id/list"-->
+        <!--adapter="@{adapter}"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+    <android.support.v7.widget.RecyclerView
+    adapter="@{adapter}"
+    itemAnimator="@{itemAnimator}"
+    app:layoutManager="@{layoutManger}"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
 </layout>

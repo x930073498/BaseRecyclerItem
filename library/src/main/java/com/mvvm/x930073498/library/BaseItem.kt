@@ -15,7 +15,6 @@ interface BaseItem : Serializable {
         val NO_ID = -1
     }
 
-    fun getType(): Int
     fun getLayoutId(): Int
     fun getVariableId(): Int
     fun onBindViewHolder(holder: BaseHolder?, position: Int)
