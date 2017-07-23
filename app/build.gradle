@@ -7,7 +7,6 @@ android {
 
     compileSdkVersion 26
     buildToolsVersion "25.0.2"
-    kapt { generateStubs = false }
     dataBinding {
         enabled = true
     }
@@ -32,7 +31,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    kapt "com.android.databinding:compiler:3.0.0-alpha4"
+    kapt 'com.android.databinding:compiler:3.0.0-alpha7'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.android.support:appcompat-v7:26.0.0-beta1'
     compile 'junit:junit:4.12'

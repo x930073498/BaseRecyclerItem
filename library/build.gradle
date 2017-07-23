@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 26
     buildToolsVersion "25.0.2"
-    kapt { generateStubs = false }
     dataBinding {
         enabled = true
 
