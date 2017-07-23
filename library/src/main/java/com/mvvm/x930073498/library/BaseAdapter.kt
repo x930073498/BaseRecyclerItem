@@ -65,7 +65,7 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>() {
             } else field = value
         }
     private var map = mutableMapOf<Int, Int>()
-    private var callBack = DefaultOnRebindCallback<ViewDataBinding>()
+    private var callBack = DefaultOnRebindCallback()
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
@@ -112,8 +112,8 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>() {
         return BaseHolder(view)
     }
 
-    inner class DefaultOnRebindCallback<E : ViewDataBinding?> : OnRebindCallback<E>() {
-        override fun onPreBind(binding: E): Boolean {
+    inner class DefaultOnRebindCallback : OnRebindCallback<ViewDataBinding>() {
+        override fun onPreBind(binding: ViewDataBinding): Boolean {
             return false
         }
     }
