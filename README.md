@@ -15,11 +15,18 @@ Step 2. Add the dependency
 	
 you shuold enable databinding first
 
-   dataBinding {
-        enabled = true
-    }
+
+	dataBinding {
+	         enabled = true
+	}
+
 
 if databingding is conflicted with kotlin then  you should add
-		    kapt { generateStubs = true }
+		
+	       kapt { generateStubs = true }
+		
+	
 in you app.gradle within tag android  and add a dependencies 
-		 kapt 'com.android.databinding:compiler:$your-databingding-version(3.0.0-alpha4)'
+
+	      kapt 'com.android.databinding:compiler:$your-databingding-version(3.0.0-alpha4)'
+		
