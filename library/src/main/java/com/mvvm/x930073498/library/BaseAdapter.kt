@@ -119,7 +119,7 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
         return getView(position, convertView, parent)
     }
 
-    private inner class BaseOnListChangedCallback : ObservableList.OnListChangedCallback<ObservableArrayList<BaseItem>>() {
+    internal inner class BaseOnListChangedCallback : ObservableList.OnListChangedCallback<ObservableArrayList<BaseItem>>() {
         override fun onItemRangeRemoved(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int) {
             notifyItemRangeRemoved(p1, p2)
             mDataObservable.notifyChanged()
@@ -193,7 +193,7 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
         return BaseHolder(view)
     }
 
-   final fun createListViewHolder(parent: ViewGroup?, layoutId: Int): BaseHolder {
+    fun createListViewHolder(parent: ViewGroup?, layoutId: Int): BaseHolder {
         val view = LayoutInflater.from(parent?.context).inflate(layoutId, parent, false)
         return BaseHolder(view)
     }
