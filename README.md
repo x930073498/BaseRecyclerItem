@@ -21,7 +21,7 @@ you shuold enable databinding first
 	}
 
 
-if databingding is conflicted with kotlin then  you should add
+if databinding is conflicted with kotlin then  you should add
 		
 	       kapt { generateStubs = true }
 		
