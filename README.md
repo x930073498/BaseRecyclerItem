@@ -21,6 +21,8 @@ you shuold enable databinding first
 	}
 
 
+then keep kolin is opened 
+
 if databinding is conflicted with kotlin then  you should add
 		
 	       kapt { generateStubs = true }
