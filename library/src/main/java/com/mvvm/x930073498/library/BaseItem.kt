@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.databinding.ViewDataBinding
 import android.support.v4.content.LocalBroadcastManager
 import java.io.Serializable
 
@@ -17,7 +18,7 @@ interface BaseItem : Serializable {
 
     fun getLayoutId(): Int
     fun getVariableId(): Int
-    fun onBindViewHolder(holder: BaseHolder?, position: Int)
+    fun onBindView(binding: ViewDataBinding?, position: Int)
 }
 
 fun Any.sendLocalBroadcast(context: Context, intent: Intent) {

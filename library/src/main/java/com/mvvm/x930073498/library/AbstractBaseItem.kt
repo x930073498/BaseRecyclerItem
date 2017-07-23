@@ -1,5 +1,7 @@
 package com.mvvm.x930073498.library
 
+import android.databinding.ViewDataBinding
+
 /**
  * Created by x930073498 on 2017/7/22.
  */
@@ -9,7 +11,6 @@ abstract class AbstractBaseItem : BaseItem {
         return BaseItem.NO_ID
     }
 
-    override fun onBindViewHolder(holder: BaseHolder?, position: Int) {
+    override fun onBindView(binding: ViewDataBinding?, position: Int) {
     }
-
 }

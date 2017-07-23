@@ -1,6 +1,7 @@
 package com.mvvm.x930073498.baserecycleritem
 
 import android.content.Intent
+import android.databinding.ViewDataBinding
 import android.view.View
 import com.mvvm.x930073498.baserecycleritem.databinding.LauoutItemTestItemBinding
 import com.mvvm.x930073498.library.*
@@ -19,12 +20,12 @@ class TestItem : AbstractBaseItem() {
         return R.layout.lauout_item_test_item
     }
 
-    override fun onBindViewHolder(holder: BaseHolder?, position: Int) {
-        if (holder == null) return
-        val binding = holder.getBinding<LauoutItemTestItemBinding>() ?: return
-        binding.tvName.text = name
-        binding.tvTitle.text = title
-        binding.button.setOnClickListener { test(it) }
+    override fun onBindView(binding: ViewDataBinding?, position: Int) {
+        if (binding is LauoutItemTestItemBinding) {
+            binding.tvName.text = name
+            binding.tvTitle.text = title
+            binding.button.setOnClickListener { test(it) }
+        }
     }
 
     fun test(v: View) {

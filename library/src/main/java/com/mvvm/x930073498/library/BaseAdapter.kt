@@ -181,7 +181,7 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
             holder.dataBinding!!.setVariable(item?.getVariableId()!!, item)
             holder.dataBinding.executePendingBindings()
         }
-        item.onBindViewHolder(holder, position)
+        item.onBindView(holder.dataBinding, position)
     }
 
     override fun getItemCount(): Int {
@@ -205,17 +205,10 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
     }
 }
 
-inline fun <reified T : ViewDataBinding> BaseHolder.getBinding(): T? {
-    if (getInternalBinding() is T) return getInternalBinding() as T
-    return null
-}
 
 class BaseHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
     internal var dataBinding = DataBindingUtil.bind<ViewDataBinding>(itemView)
     internal var item: BaseItem? = null
-    fun getInternalBinding(): ViewDataBinding {
-        return dataBinding
-    }
 }
 
 
