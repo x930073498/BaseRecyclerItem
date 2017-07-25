@@ -36,14 +36,18 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
     private val callback: BaseOnListChangedCallback by lazy {
         BaseOnListChangedCallback()
     }
-    var data = listOf<BaseItem>()
+    var data : List<BaseItem> = ObservableArrayList<BaseItem>()
         set(value) {
-            if (dataObservable) {
-                val temp = ObservableArrayList<BaseItem>()
-                temp.addAll(value)
-                temp.addOnListChangedCallback(callback)
-                field = temp
-            } else field = value
+                if(value is ObservableArrayList){
+                    value.removeOnListChangedCallback(callback)
+                    value.addOnListChangedCallback(callback)
+                    field=value
+                }else{
+                    val temp = ObservableArrayList<BaseItem>()
+                    temp.addAll(value)
+                    temp.addOnListChangedCallback(callback)
+                    field = temp
+                }
         }
     private var listViewTypeMap = mutableMapOf<Int, Int>()
     private var callBack = DefaultOnRebindCallback()
@@ -121,26 +125,31 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
 
     internal inner class BaseOnListChangedCallback : ObservableList.OnListChangedCallback<ObservableArrayList<BaseItem>>() {
         override fun onItemRangeRemoved(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int) {
+            if (!dataObservable)return
             notifyItemRangeRemoved(p1, p2)
             mDataObservable.notifyChanged()
         }
 
         override fun onChanged(p0: ObservableArrayList<BaseItem>?) {
+            if (!dataObservable)return
             notifyDataSetChanged()
             mDataObservable.notifyChanged()
         }
 
         override fun onItemRangeChanged(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int) {
+            if (!dataObservable)return
             notifyItemChanged(p1, p2)
             mDataObservable.notifyChanged()
         }
 
         override fun onItemRangeInserted(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int) {
+            if (!dataObservable)return
             notifyItemRangeInserted(p1, p2)
             mDataObservable.notifyChanged()
         }
 
         override fun onItemRangeMoved(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int, p3: Int) {
+            if (!dataObservable)return
             notifyItemMoved(p1, p2)
             mDataObservable.notifyChanged()
         }
