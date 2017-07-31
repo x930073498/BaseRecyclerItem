@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.ListAdapter
 import android.widget.SpinnerAdapter
 
@@ -15,6 +16,7 @@ import android.widget.SpinnerAdapter
  */
 @Suppress("UNCHECKED_CAST")
 open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, SpinnerAdapter {
+
     var dataObservable = true
         set(value) {
             field = value
@@ -36,18 +38,18 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
     private val callback: BaseOnListChangedCallback by lazy {
         BaseOnListChangedCallback()
     }
-    var data : List<BaseItem> = ObservableArrayList<BaseItem>()
+    var data: List<BaseItem> = ObservableArrayList<BaseItem>()
         set(value) {
-                if(value is ObservableArrayList){
-                    value.removeOnListChangedCallback(callback)
-                    value.addOnListChangedCallback(callback)
-                    field=value
-                }else{
-                    val temp = ObservableArrayList<BaseItem>()
-                    temp.addAll(value)
-                    temp.addOnListChangedCallback(callback)
-                    field = temp
-                }
+            if (value is ObservableArrayList) {
+                value.removeOnListChangedCallback(callback)
+                value.addOnListChangedCallback(callback)
+                field = value
+            } else {
+                val temp = ObservableArrayList<BaseItem>()
+                temp.addAll(value)
+                temp.addOnListChangedCallback(callback)
+                field = temp
+            }
             notifyDataSetChanged()
         }
     private var listViewTypeMap = mutableMapOf<Int, Int>()
@@ -63,7 +65,7 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
     }
 
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    final override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var holder: BaseHolder? = convertView?.tag as? BaseHolder
         val layoutId = data[position].getLayoutId()
         if (holder == null) {
@@ -75,23 +77,26 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
         return holder.itemView!!
     }
 
-    override fun registerDataSetObserver(observer: DataSetObserver) {
+    final override fun registerDataSetObserver(observer: DataSetObserver) {
         mDataObservable.registerObserver(observer)
     }
 
-    fun notifyListDataSetChange() {
+    /**
+     * ListView的notifyDataSetChange
+     */
+    final fun notifyListDataSetChange() {
         mDataObservable.notifyChanged()
     }
 
-    fun notifyDataSetInvalidated() {
+    final fun notifyDataSetInvalidated() {
         mDataObservable.notifyInvalidated()
     }
 
-    override fun getItem(position: Int): Any {
+    final override fun getItem(position: Int): Any {
         return data[position]
     }
 
-    override fun getViewTypeCount(): Int {
+    final override fun getViewTypeCount(): Int {
         var count = 0
         listViewTypeMap.clear()
         data.iterator().forEach {
@@ -126,37 +131,37 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
 
     internal inner class BaseOnListChangedCallback : ObservableList.OnListChangedCallback<ObservableArrayList<BaseItem>>() {
         override fun onItemRangeRemoved(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int) {
-            if (!dataObservable)return
+            if (!dataObservable) return
             notifyItemRangeRemoved(p1, p2)
             mDataObservable.notifyChanged()
         }
 
         override fun onChanged(p0: ObservableArrayList<BaseItem>?) {
-            if (!dataObservable)return
+            if (!dataObservable) return
             notifyDataSetChanged()
             mDataObservable.notifyChanged()
         }
 
         override fun onItemRangeChanged(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int) {
-            if (!dataObservable)return
+            if (!dataObservable) return
             notifyItemChanged(p1, p2)
             mDataObservable.notifyChanged()
         }
 
         override fun onItemRangeInserted(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int) {
-            if (!dataObservable)return
+            if (!dataObservable) return
             notifyItemRangeInserted(p1, p2)
             mDataObservable.notifyChanged()
         }
 
         override fun onItemRangeMoved(p0: ObservableArrayList<BaseItem>?, p1: Int, p2: Int, p3: Int) {
-            if (!dataObservable)return
+            if (!dataObservable) return
             notifyItemMoved(p1, p2)
             mDataObservable.notifyChanged()
         }
     }
 
-    override fun getItemId(position: Int): Long {
+    final override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
@@ -164,12 +169,12 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
         if (isFromList) return getListViewType(position) else return getRecyclerViewType(position)
     }
 
-    fun getListViewType(position: Int): Int {
+    private fun getListViewType(position: Int): Int {
         val layoutId = data[position].getLayoutId()
         return listViewTypeMap[layoutId]!!
     }
 
-    fun getRecyclerViewType(position: Int): Int {
+    private fun getRecyclerViewType(position: Int): Int {
         val layout = data[position].getLayoutId()
         return layout
     }
@@ -194,7 +199,7 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
         item.onBindView(holder.dataBinding, position)
     }
 
-    override fun getItemCount(): Int {
+    final override fun getItemCount(): Int {
         return data.size
     }
 
@@ -213,12 +218,14 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
             return false
         }
     }
-}
 
+
+}
 
 class BaseHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
     internal var dataBinding = DataBindingUtil.bind<ViewDataBinding>(itemView)
     internal var item: BaseItem? = null
 }
+
 
 
