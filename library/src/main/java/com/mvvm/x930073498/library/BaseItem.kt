@@ -16,8 +16,19 @@ interface BaseItem : Serializable {
         val NO_ID = -1
     }
 
+    /**
+     * 返回布局id
+     */
     fun getLayoutId(): Int
+
+    /**
+     * 返回Databinding绑定的数据variableId
+     */
     fun getVariableId(): Int
+
+    /**
+     * 绑定数据，注意此处显示的是当前实体类的数据，不用去实体类列表中取出实体再去赋值，多此一举
+     */
     fun onBindView(binding: ViewDataBinding?, position: Int)
 }
 

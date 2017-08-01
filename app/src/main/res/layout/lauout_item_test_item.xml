@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-<data>
-<variable
-    name="data"
-    type="com.mvvm.x930073498.baserecycleritem.TestItem"/>
-</data>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="43dp"
-        android:layout_marginStart="43dp"
-        android:text="@{data.name}" />
+    <data>
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tv_name"
-        android:layout_alignRight="@+id/tv_name"
-        android:layout_below="@+id/tv_name"
-        android:layout_marginTop="21dp"
-        android:text="@{data.title}" />
+        <variable
+            name="data"
+            type="com.mvvm.x930073498.baserecycleritem.TestItem" />
+    </data>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_title"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="53dp"
-        android:onClick="@{(v)->data.test(v)}"
-        android:layout_marginRight="53dp"
-        android:text="Button" />
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="43dp"
+            android:layout_marginStart="43dp"
+            android:text="@{data.name}" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tv_name"
+            android:layout_alignRight="@+id/tv_name"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="21dp"
+            android:text="@{data.title}" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_title"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="53dp"
+            android:layout_marginRight="53dp"
+            android:onClick="@{(v)->data.test(v)}"
+            android:text="Button" />
+    </RelativeLayout>
 
 </layout>

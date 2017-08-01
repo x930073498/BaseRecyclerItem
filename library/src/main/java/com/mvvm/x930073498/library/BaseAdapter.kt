@@ -51,6 +51,7 @@ open class BaseAdapter : RecyclerView.Adapter<BaseHolder>(), ListAdapter, Spinne
                 field = temp
             }
             notifyDataSetChanged()
+            notifyListDataSetChange()
         }
     private var listViewTypeMap = mutableMapOf<Int, Int>()
     private var callBack = DefaultOnRebindCallback()
